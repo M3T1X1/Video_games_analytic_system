@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Video Games Analytics</title>
+    <link rel="stylesheet" href="{% static 'frontend/style.css' %}">
+</head>
+<body>
+
+<header>
+    <h1>Video Games Analytics</h1>
+    <nav>
+        <a href="{% url 'home' %}">Strona główna</a> |
+        <a href="#">Dashboard</a> |
+        <a href="#">Statystyki</a>
+    </nav>
+</header>
+
+<main>
+    <section class="welcome">
+        <h2>Witaj w systemie analizy gier wideo!</h2>
+        <p>Prosty i czytelny frontend stworzony w Django.</p>
+        <a href="#" class="btn">Zobacz analizy</a>
+    </section>
+
+    <section class="cards">
+        <div class="card">
+            <h3>Sprzedaż gier</h3>
+            <p>Przeglądaj dane sprzedażowe dla wybranych tytułów.</p>
+        </div>
+        <div class="card">
+            <h3>Najpopularniejsze gry</h3>
+            <p>Lista najczęściej granego contentu i trendów.</p>
+        </div>
+        <div class="card">
+            <h3>Statystyki użytkowników</h3>
+            <p>Analiza aktywności graczy w czasie.</p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Video Games Analytics</p>
+</footer>
+
+</body>
+</html>
