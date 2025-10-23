@@ -5,20 +5,37 @@ import plotly.express as px
 def home(request):
     return render(request, 'frontend/index.html')
 
-def dashboard():
+def dashboard(request):
     data = pd.read_csv('/home/pop_os/PycharmProjects/Video_games_analytic_system/data_analysis/vgchartz-2024.csv')
 
     #Analysing the sales by each platform
-
-    sales_by_platform = data.groupby('console')['total_sales'].sum().sort_values(ascending=False)
-    fighure_1 = px.bar(
-        x = sales_by_platform.index,
-        y = sales_by_platform.values,
+    data_sales_by_platform = data.groupby('console')['total_sales'].sum().sort_values(ascending=False)
+    figure_1 = px.bar(
+        x = data_sales_by_platform.index,
+        y = data_sales_by_platform.values,
         title = 'Sales by console platform',
         labels = {'x' : "Platform", 'y' : "Sales"},
-        color = sales_by_platform.index
+        color = data_sales_by_platform.index
     )
 
-    chart = fighure_1.to_html(full_html=False)
+    chart_1 = figure_1.to_html(full_html=False)
+
+    #Analysing game sales based of their genre
+    data_sales_by_genre = data.groupby('genre')['total_sales'].sum().sort_values(ascending=False)
+    figure_2 = px.bar(
+        x = data_sales_by_genre.index,
+        y = data_sales_by_genre.values,
+        title = 'Sales by genre',
+        labels = {'x' : "Genre", 'y' : "Sales"},
+        color=data_sales_by_genre.index
+    )
+
+    chart_2 = figure_2.to_html(full_html=False)
+
+    context = {
+        'chart_1': chart_1,
+        'chart_2': chart_2
+    }
+    return render(request, 'frontend/dashboard.html', context)
 
 #dashboard()
