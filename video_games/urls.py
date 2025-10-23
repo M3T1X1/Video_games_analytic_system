@@ -21,5 +21,7 @@ from frontend import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('dashboard/', views.dashboard, name='dashboard'),
+    path('dashboard/', views.sales_by_platform, name='dashboard'),
+    path('sales_by_genre/', views.sales_by_genre, name='sales_by_genre'),
+    path('sales_by_platform/', views.sales_by_platform, name='sales_by_platform')
 ]

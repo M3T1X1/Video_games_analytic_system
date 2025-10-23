@@ -5,7 +5,7 @@ import plotly.express as px
 def home(request):
     return render(request, 'frontend/index.html')
 
-def dashboard(request):
+def sales_by_platform(request):
     data = pd.read_csv('/home/pop_os/PycharmProjects/Video_games_analytic_system/data_analysis/vgchartz-2024.csv')
 
     #Analysing the sales by each platform
@@ -18,24 +18,33 @@ def dashboard(request):
         color = data_sales_by_platform.index
     )
 
-    chart_1 = figure_1.to_html(full_html=False)
+    chart_sales_by_platform = figure_1.to_html(full_html=False)
 
-    #Analysing game sales based of their genre
+    context = {
+        'chart_sales_by_platform': chart_sales_by_platform
+    }
+
+    return render(request, 'frontend/sales_by_platform.html', context)
+
+def sales_by_genre(request):
+    # Analysing game sales based of their genre
+    data = pd.read_csv('/home/pop_os/PycharmProjects/Video_games_analytic_system/data_analysis/vgchartz-2024.csv')
+
     data_sales_by_genre = data.groupby('genre')['total_sales'].sum().sort_values(ascending=False)
     figure_2 = px.bar(
-        x = data_sales_by_genre.index,
-        y = data_sales_by_genre.values,
-        title = 'Sales by genre',
-        labels = {'x' : "Genre", 'y' : "Sales"},
+        x=data_sales_by_genre.index,
+        y=data_sales_by_genre.values,
+        title='Sales by genre',
+        labels={'x': "Genre", 'y': "Sales"},
         color=data_sales_by_genre.index
     )
 
-    chart_2 = figure_2.to_html(full_html=False)
+    chart_sales_by_genre = figure_2.to_html(full_html=False)
 
     context = {
-        'chart_1': chart_1,
-        'chart_2': chart_2
+        'chart_sales_by_genre': chart_sales_by_genre
     }
-    return render(request, 'frontend/dashboard.html', context)
+    return render(request, 'frontend/sales_by_genre.html', context)
+
 
 #dashboard()
