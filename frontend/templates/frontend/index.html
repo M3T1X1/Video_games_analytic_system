@@ -12,7 +12,7 @@
     <h1>Video Games Analytics</h1>
     <nav>
         <a href="{% url 'home' %}">Strona główna</a> |
-        <a href="#">Dashboard</a> |
+        <a href="{% url 'dashboard' %}">Dashboard</a> |
         <a href="#">Statystyki</a>
     </nav>
 </header>
@@ -26,12 +26,14 @@
 
     <section class="cards">
         <div class="card">
-            <h3>Sprzedaż gier</h3>
+            <h3>Sprzedaż gier na różne platformy</h3>
             <p>Przeglądaj dane sprzedażowe dla wybranych tytułów.</p>
+             <button onclick="window.location.href='{% url 'sales_by_platform' %}'">Zobacz analizę</button>
         </div>
         <div class="card">
-            <h3>Najpopularniejsze gry</h3>
-            <p>Lista najczęściej granego contentu i trendów.</p>
+            <h3>Sprzedaż gier na po gatunku</h3>
+            <p>Przeglądaj dane sprzedażowe dla wybranych tytułów.</p>
+             <button onclick="window.location.href='{% url 'sales_by_genre' %}'">Zobacz analizę</button>
         </div>
         <div class="card">
             <h3>Statystyki użytkowników</h3>

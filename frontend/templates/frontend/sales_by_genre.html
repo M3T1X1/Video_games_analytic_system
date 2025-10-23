@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'frontend/style.css' %}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+<header>
+    <h1>Best selling games by genre</h1>
+</header>
+
+<main>
+    <section>
+        <h2>Top 10 najlepiej sprzedających się gier</h2>
+        {{ chart_sales_by_genre|safe }}
+    </section>
+</main>
+
+</body>
+</html>

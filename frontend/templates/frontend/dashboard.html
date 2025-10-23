@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'frontend/style.css' %}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+<header>
+    <h1>Video Games Analytics - Dashboard</h1>
+</header>
+
+<main>
+    <section>
+        <h2>Sprzedaż gier na platformach</h2>
+        {{ chart_1|safe }}
+    </section>
+
+    <section>
+        <h2>Top 10 najlepiej sprzedających się gier</h2>
+        {{ chart_2|safe }}
+    </section>
+</main>
+
+</body>
+</html>
