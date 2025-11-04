@@ -84,16 +84,21 @@ def main_analysis(request):
 
     x_axis = request.GET.get('x')
     y_axis = request.GET.get('y')
+    limits = request.GET.get('limits')
 
     chart_html = None
 
+    if limits and limits.isdigit():
+        data = data.head(int(limits))
+
     if x_axis and y_axis and x_axis in data.columns and y_axis in data.columns:
-        figure = px.scatter(
+        figure = px.bar(
             data_frame=data,
             x = x_axis,
             y = y_axis,
             title = "Custom Analysis",
-            color_discrete_sequence= data.index
+            color_discrete_sequence= ['red', 'green', 'blue']
+
         )
 
         figure.update_layout(
@@ -107,7 +112,8 @@ def main_analysis(request):
         'headers': headers,
         'chart_html': chart_html,
         'selected_x_axis': x_axis,
-        'selected_y_axis': y_axis
+        'selected_y_axis': y_axis,
+        'limits': limits
     }
 
     return render(request, 'frontend/main_analysis.html',context)

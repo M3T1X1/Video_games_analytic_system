@@ -35,6 +35,8 @@
             </select>
 
             <button type="submit">Generuj wykres</button>
+             <label for="limit">Limit wyników:</label>
+            <input type="number" name="limits" id="limits" value="{{ limits }}" min="1" placeholder="np. 100">
         </form>
 
         {% if chart_html %}
