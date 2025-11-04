@@ -97,8 +97,9 @@ def main_analysis(request):
             x = x_axis,
             y = y_axis,
             title = "Custom Analysis",
-            color_discrete_sequence= ['red', 'green', 'blue']
-
+            color = 'console',
+            hover_data=['console'],
+            color_discrete_sequence=px.colors.qualitative.Set1
         )
 
         figure.update_layout(
