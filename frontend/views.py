@@ -77,4 +77,38 @@ def sales_by_rating(reqests):
 #dashboard()
 
 def main_analysis(request):
-    return render(request, 'frontend/main_analysis.html')
+    data = pd.read_csv('data_analysis/vgchartz-2024.csv')
+
+    headers = list(data.columns)[1:-1]
+
+
+    x_axis = request.GET.get('x')
+    y_axis = request.GET.get('y')
+
+    chart_html = None
+
+    if x_axis and y_axis and x_axis in data.columns and y_axis in data.columns:
+        figure = px.scatter(
+            data_frame=data,
+            x = x_axis,
+            y = y_axis,
+            title = "Custom Analysis",
+            color_discrete_sequence= data.index
+        )
+
+        figure.update_layout(
+            height=600,
+            margin=dict(l=40, r=40, b=60, t=40)
+        )
+
+        chart_html = figure.to_html(full_html=False)
+
+    context = {
+        'headers': headers,
+        'chart_html': chart_html,
+        'selected_x_axis': x_axis,
+        'selected_y_axis': y_axis
+    }
+
+    return render(request, 'frontend/main_analysis.html',context)
+

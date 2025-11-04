@@ -14,7 +14,34 @@
 </header>
 
 <main>
-    <section>
+    <section class="container">
+        <h2>Interaktywny wykres (Plotly) z pliku CSV</h2>
+
+        <form method="get" class="chart-form">
+            <label for="x">Oś X:</label>
+            <select name="x" id="x">
+                <option value="">-- wybierz kolumnę --</option>
+                {% for h in headers %}
+                    <option value="{{ h }}" {% if h == selected_x %}selected{% endif %}>{{ h }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="y">Oś Y:</label>
+            <select name="y" id="y">
+                <option value="">-- wybierz kolumnę --</option>
+                {% for h in headers %}
+                    <option value="{{ h }}" {% if h == selected_y %}selected{% endif %}>{{ h }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Generuj wykres</button>
+        </form>
+
+        {% if chart_html %}
+        <div class="chart">
+            {{ chart_html|safe }}
+        </div>
+        {% endif %}
     </section>
 </main>
 
