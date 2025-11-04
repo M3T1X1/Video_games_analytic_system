@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from frontend import views
+from frontend.views import sales_by_rating
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('dashboard/', views.sales_by_platform, name='dashboard'),
     path('sales_by_genre/', views.sales_by_genre, name='sales_by_genre'),
-    path('sales_by_platform/', views.sales_by_platform, name='sales_by_platform')
+    path('sales_by_platform/', views.sales_by_platform, name='sales_by_platform'),
+    path('sales_by_rating/', views.sales_by_rating, name='sales_by_rating'),
 ]
