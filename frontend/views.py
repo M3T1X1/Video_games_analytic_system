@@ -57,7 +57,6 @@ def sales_by_rating(reqests):
         .head(30)
     )
 
-    # Wykres słupkowy z plotly.express
     figure_3 = px.bar(
         x=avg_score_by_title.values,
         y=avg_score_by_title.index,
@@ -76,3 +75,6 @@ def sales_by_rating(reqests):
     return render(reqests, 'frontend/sales_by_rating.html', context)
 
 #dashboard()
+
+def main_analysis(request):
+    return render(request, 'frontend/main_analysis.html')
