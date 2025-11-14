@@ -18,18 +18,18 @@
         <h2>Interaktywny wykres (Plotly) z pliku CSV</h2>
 
         <form method="get" class="chart-form">
-            <label for="x">Oś X:</label>
+            <label for="x">Oś X(wartość tekstowa):</label>
             <select name="x" id="x">
-                <option value="">-- wybierz kolumnę --</option>
-                {% for h in headers %}
+                <option value="">wybierz kolumnę </option>
+                {% for h in category_columns %}
                     <option value="{{ h }}" {% if h == selected_x %}selected{% endif %}>{{ h }}</option>
                 {% endfor %}
             </select>
 
-            <label for="y">Oś Y:</label>
+            <label for="y">Oś Y (wartość numeryczna):</label>
             <select name="y" id="y">
                 <option value="">-- wybierz kolumnę --</option>
-                {% for h in headers %}
+                {% for h in numeric_columns %}
                     <option value="{{ h }}" {% if h == selected_y %}selected{% endif %}>{{ h }}</option>
                 {% endfor %}
             </select>
@@ -45,6 +45,8 @@
         </div>
         {% endif %}
     </section>
+<br>
+    <button id="save-pdf">Zapisz wykres jako PDF</button>
 </main>
 
 </body>

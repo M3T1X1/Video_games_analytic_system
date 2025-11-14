@@ -81,6 +81,8 @@ def main_analysis(request):
 
     headers = list(data.columns)[1:-1]
 
+    category_columns = ['title', 'console', 'genre', 'publisher', 'developer', 'release_date']
+    numeric_columns = ['critic_score', 'total_sales', 'na_sales', 'jp_sales', 'pal_sales', 'other_sales']
 
     x_axis = request.GET.get('x')
     y_axis = request.GET.get('y')
@@ -89,17 +91,19 @@ def main_analysis(request):
     chart_html = None
 
     if limits and limits.isdigit():
-        data = data.head(int(limits))
+        unique_titles = data['title'].drop_duplicates()[:int(limits)]
+        data = data[data['title'].isin(unique_titles)]
 
     if x_axis and y_axis and x_axis in data.columns and y_axis in data.columns:
         figure = px.bar(
             data_frame=data,
-            x = x_axis,
-            y = y_axis,
-            title = "Custom Analysis",
-            color = 'console',
+            x=x_axis,
+            y=y_axis,
+            title="Custom Analysis",
+            color='console',
             hover_data=['console'],
-            color_discrete_sequence=px.colors.qualitative.Set1
+            color_discrete_sequence=px.colors.qualitative.Set1,
+            barmode='overlay'
         )
 
         figure.update_layout(
@@ -111,11 +115,12 @@ def main_analysis(request):
 
     context = {
         'headers': headers,
+        'category_columns': category_columns,
+        'numeric_columns': numeric_columns,
         'chart_html': chart_html,
         'selected_x_axis': x_axis,
         'selected_y_axis': y_axis,
         'limits': limits
     }
 
-    return render(request, 'frontend/main_analysis.html',context)
-
+    return render(request, 'frontend/main_analysis.html', context)
