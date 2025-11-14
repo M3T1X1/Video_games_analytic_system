@@ -14,6 +14,7 @@
 </header>
 
 <main>
+<button onclick="window.location.href='/'">Powrót do strony głównej</button>
     <section class="container">
         <h2>Interaktywny wykres (Plotly) z pliku CSV</h2>
 
@@ -36,7 +37,7 @@
 
             <button type="submit">Generuj wykres</button>
              <label for="limit">Limit wyników:</label>
-            <input type="number" name="limits" id="limits" value="{{ limits }}" min="1" placeholder="np. 100">
+            <input type="number" name="limits" id="limits" value="{{ limits }}" min="1" max="20" placeholder="np. 100 (max 20)">
         </form>
 
         {% if chart_html %}
@@ -45,8 +46,6 @@
         </div>
         {% endif %}
     </section>
-<br>
-    <button id="save-pdf">Zapisz wykres jako PDF</button>
 </main>
 
 </body>
