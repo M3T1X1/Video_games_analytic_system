@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'frontend/style.css' %}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+<header>
+    <h1>Create your custom analysis</h1>
+</header>
+
+<main>
+<button onclick="window.location.href='/'">Powrót do strony głównej</button>
+    <section class="container">
+        <h2>Interaktywny wykres (Plotly) z pliku CSV</h2>
+
+        <form method="get" class="chart-form">
+            <label for="x">Oś X(wartość tekstowa):</label>
+            <select name="x" id="x">
+                <option value="">wybierz kolumnę </option>
+                {% for h in category_columns %}
+                    <option value="{{ h }}" {% if h == selected_x %}selected{% endif %}>{{ h }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="y">Oś Y (wartość numeryczna):</label>
+            <select name="y" id="y">
+                <option value="">-- wybierz kolumnę --</option>
+                {% for h in numeric_columns %}
+                    <option value="{{ h }}" {% if h == selected_y %}selected{% endif %}>{{ h }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Generuj wykres</button>
+             <label for="limit">Limit wyników:</label>
+            <input type="number" name="limits" id="limits" value="{{ limits }}" min="1" max="20" placeholder="np. 100 (max 20)">
+        </form>
+
+        {% if chart_html %}
+        <div class="chart">
+            {{ chart_html|safe }}
+        </div>
+        {% endif %}
+    </section>
+</main>
+
+</body>
+</html>
