@@ -63,7 +63,13 @@ def sales_by_rating(reqests):
         title='Top 10 Games by Average Critic Score',
         labels={'y': "Game Title", 'x': "Average Critic Score"},
         color=avg_score_by_title.values,
-        color_continuous_scale='Viridis'
+        color_continuous_scale='Viridis',
+        orientation='h'
+    )
+
+    figure_3.update_layout(
+        height=600,
+        margin=dict(l=220, r=40, b=60, t=60)
     )
 
     chart_sales_by_rating = figure_3.to_html(full_html=False)
@@ -87,6 +93,7 @@ def main_analysis(request):
     x_axis = request.GET.get('x')
     y_axis = request.GET.get('y')
     limits = request.GET.get('limits')
+    chart_type = request.GET.get('chart_type', 'bar')
 
     chart_html = None
 
@@ -95,20 +102,39 @@ def main_analysis(request):
         data = data[data['title'].isin(unique_titles)]
 
     if x_axis and y_axis and x_axis in data.columns and y_axis in data.columns:
-        figure = px.bar(
-            data_frame=data,
-            x=x_axis,
-            y=y_axis,
-            title="Custom Analysis",
-            color='console',
-            hover_data=['console'],
-            color_discrete_sequence=px.colors.qualitative.Set1,
-            barmode='overlay'
-        )
+        if chart_type == 'scatter':
+            figure = px.scatter(
+                data_frame=data,
+                x=x_axis,
+                y=y_axis,
+                title="Custom Analysis",
+                color='console',
+                hover_data=['title', 'console'],
+                color_discrete_sequence=px.colors.qualitative.Set1,
+            )
+        else:
+            figure = px.bar(
+                data_frame=data,
+                x=x_axis,
+                y=y_axis,
+                title="Custom Analysis",
+                color='console',
+                hover_data=['console'],
+                color_discrete_sequence=px.colors.qualitative.Set1,
+                barmode='overlay',
+            )
 
         figure.update_layout(
             height=600,
-            margin=dict(l=40, r=40, b=60, t=40)
+            margin=dict(l=40, r=40, b=60, t=40),
+            legend=dict(
+                title="Kliknij aby filtrować",
+                orientation="v",
+                yanchor="top",
+                y=1,
+                xanchor="left",
+                x=1.02
+            )
         )
 
         chart_html = figure.to_html(full_html=False)
@@ -118,9 +144,10 @@ def main_analysis(request):
         'category_columns': category_columns,
         'numeric_columns': numeric_columns,
         'chart_html': chart_html,
-        'selected_x_axis': x_axis,
-        'selected_y_axis': y_axis,
-        'limits': limits
+        'selected_x': x_axis,
+        'selected_y': y_axis,
+        'limits': limits,
+        'chart_type': chart_type,
     }
 
     return render(request, 'frontend/main_analysis.html', context)
