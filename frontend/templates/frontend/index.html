@@ -11,8 +11,8 @@
 <header>
     <h1>Video Games Analytics</h1>
     <nav>
-        <a href="{% url 'home' %}">Strona główna</a> |
-        <a href="{% url 'dashboard' %}">Dashboard</a> |
+        <a href="{% url 'home' %}">Strona główna</a>
+        <a href="{% url 'main_analysis' %}">Dashboard</a>
         <a href="#">Statystyki</a>
     </nav>
 </header>
@@ -21,24 +21,32 @@
     <section class="welcome">
         <h2>Witaj w systemie analizy gier wideo!</h2>
         <p>Prosty i czytelny frontend stworzony w Django.</p>
-        <a onclick="window.location.href='{% url 'main_analysis' %}'" class="btn">Zobacz analizy</a>
+        <a href="{% url 'main_analysis' %}" class="btn">Zobacz analizy</a>
     </section>
 
     <section class="cards">
         <div class="card">
             <h3>Sprzedaż gier na różne platformy</h3>
-            <p>Przeglądaj dane sprzedażowe dla wybranych tytułów.</p>
-             <button onclick="window.location.href='{% url 'sales_by_platform' %}'">Zobacz analizę</button>
+            <p>Przeglądaj dane sprzedażowe dla wybranych platform.</p>
+            <button class="btn" onclick="window.location.href='{% url 'sales_by_platform' %}'">
+                Zobacz analizę
+            </button>
         </div>
+
         <div class="card">
-            <h3>Sprzedaż gier na po gatunku</h3>
-            <p>Przeglądaj dane sprzedażowe dla wybranych tytułów.</p>
-             <button onclick="window.location.href='{% url 'sales_by_genre' %}'">Zobacz analizę</button>
+            <h3>Sprzedaż gier po gatunku</h3>
+            <p>Sprawdź, które gatunki gier sprzedają się najlepiej.</p>
+            <button class="btn" onclick="window.location.href='{% url 'sales_by_genre' %}'">
+                Zobacz analizę
+            </button>
         </div>
+
         <div class="card">
             <h3>Sprzedaż gier po ocenie</h3>
-            <p>Przeglądaj dane przedażowe dla wybranych tytułów.</p>
-             <button onclick="window.location.href='{% url 'sales_by_rating' %}'">Zobacz analizę</button>
+            <p>Zobacz najlepiej oceniane tytuły i ich sprzedaż.</p>
+            <button class="btn" onclick="window.location.href='{% url 'sales_by_rating' %}'">
+                Zobacz analizę
+            </button>
         </div>
     </section>
 </main>

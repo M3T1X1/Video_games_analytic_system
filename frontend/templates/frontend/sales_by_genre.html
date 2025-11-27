@@ -14,9 +14,12 @@
 </header>
 <main>
     <button onclick="window.location.href='/'">Powrót do strony głównej</button>
-    <section>
+
+    <section class="container">
         <h2>Top 10 najlepiej sprzedających się gier</h2>
-        {{ chart_sales_by_genre|safe }}
+        <div class="chart">
+            {{ chart_sales_by_genre|safe }}
+        </div>
     </section>
 </main>
 

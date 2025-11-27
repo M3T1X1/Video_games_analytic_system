@@ -14,14 +14,15 @@
 </header>
 
 <main>
-<button onclick="window.location.href='/'">Powrót do strony głównej</button>
+    <button onclick="window.location.href='/'">Powrót do strony głównej</button>
+
     <section class="container">
         <h2>Interaktywny wykres (Plotly) z pliku CSV</h2>
 
         <form method="get" class="chart-form">
-            <label for="x">Oś X(wartość tekstowa):</label>
+            <label for="x">Oś X (wartość tekstowa):</label>
             <select name="x" id="x">
-                <option value="">wybierz kolumnę </option>
+                <option value="">wybierz kolumnę</option>
                 {% for h in category_columns %}
                     <option value="{{ h }}" {% if h == selected_x %}selected{% endif %}>{{ h }}</option>
                 {% endfor %}
@@ -35,15 +36,30 @@
                 {% endfor %}
             </select>
 
+            <label for="chart_type">Rodzaj wykresu:</label>
+            <select name="chart_type" id="chart_type">
+                <option value="bar" {% if chart_type == "bar" %}selected{% endif %}>Słupkowy</option>
+                <option value="scatter" {% if chart_type == "scatter" %}selected{% endif %}>Punktowy</option>
+            </select>
+
+            <label for="limits">Limit wyników:</label>
+            <input
+                type="number"
+                name="limits"
+                id="limits"
+                value="{{ limits }}"
+                min="1"
+                max="20"
+                placeholder="np. 100 (max 20)"
+            >
+
             <button type="submit">Generuj wykres</button>
-             <label for="limit">Limit wyników:</label>
-            <input type="number" name="limits" id="limits" value="{{ limits }}" min="1" max="20" placeholder="np. 100 (max 20)">
         </form>
 
         {% if chart_html %}
-        <div class="chart">
-            {{ chart_html|safe }}
-        </div>
+            <div class="chart">
+                {{ chart_html|safe }}
+            </div>
         {% endif %}
     </section>
 </main>

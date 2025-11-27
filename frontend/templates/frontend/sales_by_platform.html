@@ -14,10 +14,15 @@
 </header>
 <main>
     <button onclick="window.location.href='/'">Powrót do strony głównej</button>
-    <section>
-        {{ chart_sales_by_platform|safe }}
+
+    <section class="container">
+        <h2>Sales by console platform</h2>
+        <div class="chart">
+            {{ chart_sales_by_platform|safe }}
+        </div>
     </section>
 </main>
+
 
 </body>
 </html>
