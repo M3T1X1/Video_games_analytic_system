@@ -3,66 +3,122 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Video Games Analytics</title>
     <link rel="stylesheet" href="{% static 'frontend/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
+    <div class="app">
+        <div class="bg-gradient"></div>
+        <div class="bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
 
-<header>
-    <h1>Create your custom analysis</h1>
-</header>
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div>
+                        <h1>Video Games Analytics</h1>
+                        <span class="tagline">Interaktywny Dashboard</span>
+                    </div>
+                </div>
 
-<main>
-    <button onclick="window.location.href='/'">Powrót do strony głównej</button>
-
-    <section class="container">
-        <h2>Interaktywny wykres (Plotly) z pliku CSV</h2>
-
-        <form method="get" class="chart-form">
-            <label for="x">Oś X (wartość tekstowa):</label>
-            <select name="x" id="x">
-                <option value="">wybierz kolumnę</option>
-                {% for h in category_columns %}
-                    <option value="{{ h }}" {% if h == selected_x %}selected{% endif %}>{{ h }}</option>
-                {% endfor %}
-            </select>
-
-            <label for="y">Oś Y (wartość numeryczna):</label>
-            <select name="y" id="y">
-                <option value="">-- wybierz kolumnę --</option>
-                {% for h in numeric_columns %}
-                    <option value="{{ h }}" {% if h == selected_y %}selected{% endif %}>{{ h }}</option>
-                {% endfor %}
-            </select>
-
-            <label for="chart_type">Rodzaj wykresu:</label>
-            <select name="chart_type" id="chart_type">
-                <option value="bar" {% if chart_type == "bar" %}selected{% endif %}>Słupkowy</option>
-                <option value="scatter" {% if chart_type == "scatter" %}selected{% endif %}>Punktowy</option>
-            </select>
-
-            <label for="limits">Limit wyników:</label>
-            <input
-                type="number"
-                name="limits"
-                id="limits"
-                value="{{ limits }}"
-                min="1"
-                max="20"
-                placeholder="np. 100 (max 20)"
-            >
-
-            <button type="submit">Generuj wykres</button>
-        </form>
-
-        {% if chart_html %}
-            <div class="chart">
-                {{ chart_html|safe }}
+                <button class="btn btn-secondary" onclick="window.location.href='/'">
+                    <i class="fas fa-arrow-left"></i>
+                    Powrót
+                </button>
             </div>
-        {% endif %}
-    </section>
-</main>
+        </header>
 
+        <main class="main">
+            <div class="container">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>
+                            <i class="fas fa-chart-line"></i>
+                            Interaktywny wykres
+                        </h2>
+                        <p>Analizuj swoje dane</p>
+                    </div>
+
+                    <form method="get" class="chart-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="x">
+                                    <span>Oś X</span>
+                                </label>
+                                <select name="x" id="x" required>
+                                    <option value="">Wybierz kolumnę...</option>
+                                    {% for h in category_columns %}
+                                        <option value="{{ h }}" {% if h == selected_x %}selected{% endif %}>{{ h }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="y">
+                                    <span>Oś Y</span>
+                                </label>
+                                <select name="y" id="y" required>
+                                    <option value="">Wybierz kolumnę...</option>
+                                    {% for h in numeric_columns %}
+                                        <option value="{{ h }}" {% if h == selected_y %}selected{% endif %}>{{ h }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="chart_type">Typ wykresu</label>
+                                <select name="chart_type" id="chart_type">
+                                    <option value="bar" {% if chart_type == "bar" %}selected{% endif %}>
+                                        Słupkowy
+                                    </option>
+                                    <option value="scatter" {% if chart_type == "scatter" %}selected{% endif %}>
+                                        Punktowy
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="limits">
+                                    Limit wyników
+                                </label>
+                                <input
+                                    type="number"
+                                    name="limits"
+                                    id="limits"
+                                    value="{{ limits }}"
+                                    min="1"
+                                    max="20"
+                                    placeholder="10"
+                                >
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <span>Generuj wykres</span>
+                            <i class="fas fa-chart-bar"></i>
+                        </button>
+                    </form>
+
+                    {% if chart_html %}
+                        <div class="chart-container">
+                            <div class="chart">
+                                {{ chart_html|safe }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

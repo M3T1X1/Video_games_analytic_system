@@ -3,26 +3,58 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprzedaż po platformach | Video Games Analytics</title>
     <link rel="stylesheet" href="{% static 'frontend/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-
-<header>
-    <h1>Best selling games by platform</h1>
-</header>
-<main>
-    <button onclick="window.location.href='/'">Powrót do strony głównej</button>
-
-    <section class="container">
-        <h2>Sales by console platform</h2>
-        <div class="chart">
-            {{ chart_sales_by_platform|safe }}
+    <div class="app">
+        <div class="bg-gradient"></div>
+        <div class="bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
         </div>
-    </section>
-</main>
 
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div>
+                        <h1>Video Games Analytics</h1>
+                        <span class="tagline">Sprzedaż gier po platformach</span>
+                    </div>
+                </div>
 
+                <button class="btn btn-secondary" onclick="window.location.href='/'">
+                    <i class="fas fa-arrow-left"></i>
+                    Powrót
+                </button>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="container">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>
+                            Porównanie całkowitej sprzedaży gier na poszczególnych platformach konsolowych.
+                        </h2>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart">
+                            {{ chart_sales_by_platform|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
