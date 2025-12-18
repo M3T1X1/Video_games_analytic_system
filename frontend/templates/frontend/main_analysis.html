@@ -4,26 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Developeruch</title>
+    <title>Dashboard | Video Games Analytics</title>
     <link rel="stylesheet" href="{% static 'frontend/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
     <div class="app">
         <div class="bg-gradient"></div>
+        <div class="bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
 
         <header class="header">
             <div class="header-content">
-                <h1 class="logo">
-                    <span class="logo-icon">📊</span>
-                    Developeruch Analytics
-                </h1>
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div>
+                        <h1>Video Games Analytics</h1>
+                        <span class="tagline">Interaktywny Dashboard</span>
+                    </div>
+                </div>
+
                 <button class="btn btn-secondary" onclick="window.location.href='/'">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/>
-                        <path d="M14 17h-4v-2h4v2zm0-4h-4v-2h4v2z"/>
-                    </svg>
+                    <i class="fas fa-arrow-left"></i>
                     Powrót
                 </button>
             </div>
@@ -34,10 +43,10 @@
                 <div class="card">
                     <div class="card-header">
                         <h2>
-                            <span class="icon">📈</span>
+                            <i class="fas fa-chart-line"></i>
                             Interaktywny wykres
                         </h2>
-                        <p>Analizuj swoje dane z plików CSV</p>
+                        <p>Analizuj swoje dane</p>
                     </div>
 
                     <form method="get" class="chart-form">
@@ -45,7 +54,6 @@
                             <div class="form-group">
                                 <label for="x">
                                     <span>Oś X</span>
-                                    <small>(kategoria)</small>
                                 </label>
                                 <select name="x" id="x" required>
                                     <option value="">Wybierz kolumnę...</option>
@@ -58,7 +66,6 @@
                             <div class="form-group">
                                 <label for="y">
                                     <span>Oś Y</span>
-                                    <small>(liczby)</small>
                                 </label>
                                 <select name="y" id="y" required>
                                     <option value="">Wybierz kolumnę...</option>
@@ -72,10 +79,10 @@
                                 <label for="chart_type">Typ wykresu</label>
                                 <select name="chart_type" id="chart_type">
                                     <option value="bar" {% if chart_type == "bar" %}selected{% endif %}>
-                                        📊 Słupkowy
+                                        Słupkowy
                                     </option>
                                     <option value="scatter" {% if chart_type == "scatter" %}selected{% endif %}>
-                                        📍 Punktowy
+                                        Punktowy
                                     </option>
                                 </select>
                             </div>
@@ -83,7 +90,6 @@
                             <div class="form-group">
                                 <label for="limits">
                                     Limit wyników
-                                    <small>max 20</small>
                                 </label>
                                 <input
                                     type="number"
@@ -99,10 +105,7 @@
 
                         <button type="submit" class="btn btn-primary btn-large">
                             <span>Generuj wykres</span>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                <polyline points="22,4 12,14.01 9,11.01"/>
-                            </svg>
+                            <i class="fas fa-chart-bar"></i>
                         </button>
                     </form>
 
