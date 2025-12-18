@@ -51,7 +51,7 @@
                     </h2>
                     <p>Zaawansowane narzędzia do analizy sprzedaży, platform i gatunków gier. Stworzone z pasji do danych i gamingu.</p>
                     <div class="hero-buttons">
-                        <a href="#features" class="btn btn-primary btn-large">
+                        <a href="{% url 'main_analysis' %}" class="btn btn-primary btn-large external-link">
                             <i class="fas fa-rocket"></i>
                             Rozpocznij analizę
                         </a>
@@ -78,7 +78,7 @@
                             </div>
                             <h4>Sprzedaż po platformach</h4>
                             <p>Porównaj sprzedaż gier na różnych platformach gamingowych i znajdź lidera rynku.</p>
-                            <a href="{% url 'sales_by_platform' %}" class="btn btn-primary">
+                            <a href="{% url 'sales_by_platform' %}" class="btn btn-primary external-link">
                                 <i class="fas fa-arrow-right"></i> Zobacz analizę
                             </a>
                         </div>
@@ -89,7 +89,7 @@
                             </div>
                             <h4>Sprzedaż po gatunkach</h4>
                             <p>Odkryj które gatunki gier dominują na rynku i generują największe zyski.</p>
-                            <a href="{% url 'sales_by_genre' %}" class="btn btn-primary">
+                            <a href="{% url 'sales_by_genre' %}" class="btn btn-primary external-link">
                                 <i class="fas fa-arrow-right"></i> Zobacz analizę
                             </a>
                         </div>
@@ -100,7 +100,7 @@
                             </div>
                             <h4>Sprzedaż po ocenach</h4>
                             <p>Sprawdź korelację między ocenami krytyków a rzeczywistą sprzedażą tytułów.</p>
-                            <a href="{% url 'sales_by_rating' %}" class="btn btn-primary">
+                            <a href="{% url 'sales_by_rating' %}" class="btn btn-primary external-link">
                                 <i class="fas fa-arrow-right"></i> Zobacz analizę
                             </a>
                         </div>
@@ -117,7 +117,7 @@
     </div>
 
     <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]:not(.external-link)').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
