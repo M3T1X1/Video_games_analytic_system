@@ -3,66 +3,119 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Developeruch</title>
     <link rel="stylesheet" href="{% static 'frontend/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
+    <div class="app">
+        <div class="bg-gradient"></div>
 
-<header>
-    <h1>Create your custom analysis</h1>
-</header>
-
-<main>
-    <button onclick="window.location.href='/'">Powrót do strony głównej</button>
-
-    <section class="container">
-        <h2>Interaktywny wykres (Plotly) z pliku CSV</h2>
-
-        <form method="get" class="chart-form">
-            <label for="x">Oś X (wartość tekstowa):</label>
-            <select name="x" id="x">
-                <option value="">wybierz kolumnę</option>
-                {% for h in category_columns %}
-                    <option value="{{ h }}" {% if h == selected_x %}selected{% endif %}>{{ h }}</option>
-                {% endfor %}
-            </select>
-
-            <label for="y">Oś Y (wartość numeryczna):</label>
-            <select name="y" id="y">
-                <option value="">-- wybierz kolumnę --</option>
-                {% for h in numeric_columns %}
-                    <option value="{{ h }}" {% if h == selected_y %}selected{% endif %}>{{ h }}</option>
-                {% endfor %}
-            </select>
-
-            <label for="chart_type">Rodzaj wykresu:</label>
-            <select name="chart_type" id="chart_type">
-                <option value="bar" {% if chart_type == "bar" %}selected{% endif %}>Słupkowy</option>
-                <option value="scatter" {% if chart_type == "scatter" %}selected{% endif %}>Punktowy</option>
-            </select>
-
-            <label for="limits">Limit wyników:</label>
-            <input
-                type="number"
-                name="limits"
-                id="limits"
-                value="{{ limits }}"
-                min="1"
-                max="20"
-                placeholder="np. 100 (max 20)"
-            >
-
-            <button type="submit">Generuj wykres</button>
-        </form>
-
-        {% if chart_html %}
-            <div class="chart">
-                {{ chart_html|safe }}
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">
+                    <span class="logo-icon">📊</span>
+                    Developeruch Analytics
+                </h1>
+                <button class="btn btn-secondary" onclick="window.location.href='/'">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/>
+                        <path d="M14 17h-4v-2h4v2zm0-4h-4v-2h4v2z"/>
+                    </svg>
+                    Powrót
+                </button>
             </div>
-        {% endif %}
-    </section>
-</main>
+        </header>
 
+        <main class="main">
+            <div class="container">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>
+                            <span class="icon">📈</span>
+                            Interaktywny wykres
+                        </h2>
+                        <p>Analizuj swoje dane z plików CSV</p>
+                    </div>
+
+                    <form method="get" class="chart-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="x">
+                                    <span>Oś X</span>
+                                    <small>(kategoria)</small>
+                                </label>
+                                <select name="x" id="x" required>
+                                    <option value="">Wybierz kolumnę...</option>
+                                    {% for h in category_columns %}
+                                        <option value="{{ h }}" {% if h == selected_x %}selected{% endif %}>{{ h }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="y">
+                                    <span>Oś Y</span>
+                                    <small>(liczby)</small>
+                                </label>
+                                <select name="y" id="y" required>
+                                    <option value="">Wybierz kolumnę...</option>
+                                    {% for h in numeric_columns %}
+                                        <option value="{{ h }}" {% if h == selected_y %}selected{% endif %}>{{ h }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="chart_type">Typ wykresu</label>
+                                <select name="chart_type" id="chart_type">
+                                    <option value="bar" {% if chart_type == "bar" %}selected{% endif %}>
+                                        📊 Słupkowy
+                                    </option>
+                                    <option value="scatter" {% if chart_type == "scatter" %}selected{% endif %}>
+                                        📍 Punktowy
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="limits">
+                                    Limit wyników
+                                    <small>max 20</small>
+                                </label>
+                                <input
+                                    type="number"
+                                    name="limits"
+                                    id="limits"
+                                    value="{{ limits }}"
+                                    min="1"
+                                    max="20"
+                                    placeholder="10"
+                                >
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <span>Generuj wykres</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22,4 12,14.01 9,11.01"/>
+                            </svg>
+                        </button>
+                    </form>
+
+                    {% if chart_html %}
+                        <div class="chart-container">
+                            <div class="chart">
+                                {{ chart_html|safe }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

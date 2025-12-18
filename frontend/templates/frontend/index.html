@@ -3,57 +3,156 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Video Games Analytics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Games Analytics | Developeruch</title>
     <link rel="stylesheet" href="{% static 'frontend/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-<header>
-    <h1>Video Games Analytics</h1>
-    <nav>
-        <a href="{% url 'home' %}">Strona główna</a>
-        <a href="{% url 'main_analysis' %}">Dashboard</a>
-        <a href="#">Statystyki</a>
-    </nav>
-</header>
-
-<main>
-    <section class="welcome">
-        <h2>Witaj w systemie analizy gier wideo!</h2>
-        <p>Prosty i czytelny frontend stworzony w Django.</p>
-        <a href="{% url 'main_analysis' %}" class="btn">Zobacz analizy</a>
-    </section>
-
-    <section class="cards">
-        <div class="card">
-            <h3>Sprzedaż gier na różne platformy</h3>
-            <p>Przeglądaj dane sprzedażowe dla wybranych platform.</p>
-            <button class="btn" onclick="window.location.href='{% url 'sales_by_platform' %}'">
-                Zobacz analizę
-            </button>
+    <div class="app">
+        <div class="bg-gradient"></div>
+        <div class="bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
         </div>
 
-        <div class="card">
-            <h3>Sprzedaż gier po gatunku</h3>
-            <p>Sprawdź, które gatunki gier sprzedają się najlepiej.</p>
-            <button class="btn" onclick="window.location.href='{% url 'sales_by_genre' %}'">
-                Zobacz analizę
-            </button>
-        </div>
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div>
+                        <h1>Video Games Analytics</h1>
+                        <span class="tagline">Analiza danych gamingowych</span>
+                    </div>
+                </div>
 
-        <div class="card">
-            <h3>Sprzedaż gier po ocenie</h3>
-            <p>Zobacz najlepiej oceniane tytuły i ich sprzedaż.</p>
-            <button class="btn" onclick="window.location.href='{% url 'sales_by_rating' %}'">
-                Zobacz analizę
-            </button>
-        </div>
-    </section>
-</main>
+                <nav class="nav">
+                    <a href="#home" class="nav-link active">
+                        <i class="fas fa-home"></i> Strona główna
+                    </a>
+                    <a href="#features" class="nav-link">
+                        <i class="fas fa-chart-line"></i> Analizy
+                    </a>
+                </nav>
+            </div>
+        </header>
 
-<footer>
-    <p>© 2025 Video Games Analytics</p>
-</footer>
+        <main class="main">
+            <section class="hero" id="home">
+                <div class="hero-content">
+                    <h2>
+                        <span class="gradient-text">Witaj w systemie</span>
+                        <br>
+                        <span>analizy gier wideo!</span>
+                    </h2>
+                    <p>Zaawansowane narzędzia do analizy sprzedaży, platform i gatunków gier. Stworzone z pasji do danych i gamingu.</p>
+                    <div class="hero-buttons">
+                        <a href="#features" class="btn btn-primary btn-large">
+                            <i class="fas fa-rocket"></i>
+                            Rozpocznij analizę
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="gamepad-float">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                </div>
+            </section>
 
+            <section class="features" id="features">
+                <div class="container">
+                    <div class="section-header">
+                        <h3><i class="fas fa-star"></i> Dostępne analizy</h3>
+                        <p>Wybierz analizę, która Cię interesuje</p>
+                    </div>
+
+                    <div class="cards-grid">
+                        <div class="card feature-card">
+                            <div class="card-icon">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <h4>Sprzedaż po platformach</h4>
+                            <p>Porównaj sprzedaż gier na różnych platformach gamingowych i znajdź lidera rynku.</p>
+                            <a href="{% url 'sales_by_platform' %}" class="btn btn-primary">
+                                <i class="fas fa-arrow-right"></i> Zobacz analizę
+                            </a>
+                        </div>
+
+                        <div class="card feature-card">
+                            <div class="card-icon">
+                                <i class="fas fa-tag"></i>
+                            </div>
+                            <h4>Sprzedaż po gatunkach</h4>
+                            <p>Odkryj które gatunki gier dominują na rynku i generują największe zyski.</p>
+                            <a href="{% url 'sales_by_genre' %}" class="btn btn-primary">
+                                <i class="fas fa-arrow-right"></i> Zobacz analizę
+                            </a>
+                        </div>
+
+                        <div class="card feature-card">
+                            <div class="card-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4>Sprzedaż po ocenach</h4>
+                            <p>Sprawdź korelację między ocenami krytyków a rzeczywistą sprzedażą tytułów.</p>
+                            <a href="{% url 'sales_by_rating' %}" class="btn btn-primary">
+                                <i class="fas fa-arrow-right"></i> Zobacz analizę
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2025 Video Games Analytics. Stworzone z <i class="fas fa-heart" style="color: #ef4444;"></i> przez dewelopera.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const sections = ['#home', '#features'];
+            const scrollPos = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const element = document.querySelector(section);
+                if (element && element.offsetTop <= scrollPos &&
+                    element.offsetTop + element.offsetHeight > scrollPos) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    const activeLink = document.querySelector(`a[href="${section}"]`);
+                    if (activeLink) activeLink.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
